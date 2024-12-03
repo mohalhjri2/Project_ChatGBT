@@ -1,0 +1,63 @@
+# Define the Pet type
+type Pet {
+    id: ID!
+    name: String!
+    animalType: String!
+    breed: String
+    age: Int!
+    household: Household
+}
+
+# Define the Household type
+type Household {
+    eircode: ID!
+    numberOfOccupants: Int!
+    maxNumberOfOccupants: Int!
+    ownerOccupied: Boolean!
+    pets: [Pet]
+}
+
+# Define the HouseholdStatistics type
+type HouseholdStatistics {
+    averageOccupants: Float!
+    maxOccupants: Int!
+    ownerOccupiedCount: Int!
+}
+
+# Define input types for mutations
+input HouseholdInput {
+    eircode: ID!
+    numberOfOccupants: Int!
+    maxNumberOfOccupants: Int!
+    ownerOccupied: Boolean!
+}
+
+# Queries
+type Query {
+    # Retrieve all households
+    allHouseholds: [Household!]!
+
+    # Retrieve all pets filtered by animal type
+    petsByAnimalType(animalType: String!): [Pet!]!
+
+    # Retrieve a specific household by eircode
+    householdByEircode(eircode: ID!): Household
+
+    # Retrieve a specific pet by ID
+    petById(id: ID!): Pet
+
+    # Retrieve household statistics
+    householdStatistics: HouseholdStatistics!
+}
+
+# Mutations
+type Mutation {
+    # Create a new household
+    createHousehold(household: HouseholdInput!): Household!
+
+    # Delete a household by eircode
+    deleteHousehold(eircode: ID!): String!
+
+    # Delete a pet by ID
+    deletePet(id: ID!): String!
+}
