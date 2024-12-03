@@ -7,6 +7,7 @@ import com.example.project_chatgbt.services.HouseholdService;
 import com.example.project_chatgbt.services.PetService;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
@@ -22,8 +23,6 @@ public class GraphQLController {
         this.petService = petService;
         this.householdService = householdService;
     }
-
-    // Queries
 
     @QueryMapping
     public List<Household> allHouseholds() {
@@ -50,9 +49,8 @@ public class GraphQLController {
         return householdService.getHouseholdStatistics();
     }
 
-    // Mutations
-
     @MutationMapping
+    @Secured("ROLE_USER") // Allow authenticated users with USER role
     public Household createHousehold(HouseholdInput household) {
         Household newHousehold = new Household(
                 household.eircode(),
@@ -65,12 +63,14 @@ public class GraphQLController {
     }
 
     @MutationMapping
+    @Secured("ROLE_ADMIN") // Allow only ADMIN role
     public String deleteHousehold(String eircode) {
         householdService.deleteHousehold(eircode);
         return "Household with eircode " + eircode + " deleted successfully.";
     }
 
     @MutationMapping
+    @Secured("ROLE_ADMIN") // Allow only ADMIN role
     public String deletePet(Long id) {
         petService.deletePetById(id);
         return "Pet with ID " + id + " deleted successfully.";

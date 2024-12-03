@@ -16,3 +16,13 @@ CREATE TABLE pet (
                      household_eircode VARCHAR(20),
                      FOREIGN KEY (household_eircode) REFERENCES household(eircode) ON DELETE SET NULL
 );
+CREATE TABLE users (
+                       id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                       username VARCHAR(255) NOT NULL UNIQUE,
+                       password VARCHAR(255) NOT NULL,
+                       role VARCHAR(50) NOT NULL,
+                       locked BOOLEAN NOT NULL DEFAULT FALSE,
+                       first_name VARCHAR(100),
+                       last_name VARCHAR(100),
+                       county VARCHAR(100)
+);

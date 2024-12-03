@@ -61,3 +61,38 @@ type Mutation {
     # Delete a pet by ID
     deletePet(id: ID!): String!
 }
+
+# Define the User type
+type User {
+    id: ID!
+    username: String! # Email
+    firstName: String!
+    lastName: String!
+    county: String
+    role: String!
+    locked: Boolean!
+}
+
+# Input type for creating a new user
+input UserInput {
+    username: String!
+    password: String!
+    firstName: String!
+    lastName: String!
+    county: String
+    role: String!
+    locked: Boolean
+}
+
+# Queries for User management
+type Query {
+    allUsers: [User!]!
+    userByUsername(username: String!): User
+}
+
+# Mutations for User management
+type Mutation {
+    createUser(user: UserInput!): User!
+    deleteUser(username: String!): String!
+    updateUserRole(username: String!, role: String!): User!
+}

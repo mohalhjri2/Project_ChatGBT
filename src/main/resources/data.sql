@@ -12,3 +12,9 @@ VALUES
     ('Whiskers', 'Cat', 'Siamese', 3, 'D34DEF2'),
     ('Charlie', 'Dog', 'Bulldog', 4, 'D12ABC1'),
     ('Mittens', 'Cat', 'Persian', 2, 'D56GHI3');
+
+-- Insert sample data into Users
+INSERT INTO users (username, password, role, locked, first_name, last_name, county)
+VALUES
+    ('user1@example.com', '$2a$10$8sPjVRgFqj/FYp12vrPTjePzFc6sdEdsIEi2tZgRL7qRhMksDiS1e', 'USER', false, 'John', 'Doe', 'Cork'),
+    ('admin@example.com', '$2a$10$8sPjVRgFqj/FYp12vrPTjePzFc6sdEdsIEi2tZgRL7qRhMksDiS1e', 'ADMIN', false, 'Jane', 'Smith', 'Kerry');
