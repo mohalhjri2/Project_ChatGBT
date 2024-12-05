@@ -32,36 +32,6 @@ input HouseholdInput {
     ownerOccupied: Boolean!
 }
 
-# Queries
-type Query {
-    # Retrieve all households
-    allHouseholds: [Household!]!
-
-    # Retrieve all pets filtered by animal type
-    petsByAnimalType(animalType: String!): [Pet!]!
-
-    # Retrieve a specific household by eircode
-    householdByEircode(eircode: ID!): Household
-
-    # Retrieve a specific pet by ID
-    petById(id: ID!): Pet
-
-    # Retrieve household statistics
-    householdStatistics: HouseholdStatistics!
-}
-
-# Mutations
-type Mutation {
-    # Create a new household
-    createHousehold(household: HouseholdInput!): Household!
-
-    # Delete a household by eircode
-    deleteHousehold(eircode: ID!): String!
-
-    # Delete a pet by ID
-    deletePet(id: ID!): String!
-}
-
 # Define the User type
 type User {
     id: ID!
@@ -84,14 +54,32 @@ input UserInput {
     locked: Boolean
 }
 
-# Queries for User management
+# Consolidated Queries
 type Query {
+    # Household Queries
+    allHouseholds: [Household!]!
+    householdByEircode(eircode: ID!): Household
+    householdStatistics: HouseholdStatistics!
+
+    # Pet Queries
+    petsByAnimalType(animalType: String!): [Pet!]!
+    petById(id: ID!): Pet
+
+    # User Queries
     allUsers: [User!]!
     userByUsername(username: String!): User
 }
 
-# Mutations for User management
+# Consolidated Mutations
 type Mutation {
+    # Household Mutations
+    createHousehold(household: HouseholdInput!): Household!
+    deleteHousehold(eircode: ID!): String!
+
+    # Pet Mutations
+    deletePet(id: ID!): String!
+
+    # User Mutations
     createUser(user: UserInput!): User!
     deleteUser(username: String!): String!
     updateUserRole(username: String!, role: String!): User!
